@@ -10,9 +10,7 @@ public class Population {
     long delta = 0;
     for (int i = 0; i <= 100; i=i+5) {
       curr = CalcPopulation(i);
-      if (i > 0) {
-      	delta = curr - CalcPopulation(i-1);
-			} 
+      delta = curr - CalcPopulation(i-5);
 			System.out.printf("%d:\t%d\t+%d\n", i, curr, delta);
  		}
   }
@@ -20,10 +18,14 @@ public class Population {
   // Расчет популяции на любой год
 	public static long CalcPopulation(int year) {
   	long res = 0;
-  	long birth = (long) (year * 60.0 / 7 * psec);
-  	long death = (long) (year * 60.0 / 13 * psec);
-  	long mig =   (long) (year * 60.0 / 45 * psec);
-    res = begin + birth + mig - death;
+  	if (year <= 0) {
+			res = begin;
+    } else {
+			long birth = (long) (year * 60.0 / 7 * psec);
+  		long death = (long) (year * 60.0 / 13 * psec);
+  		long mig =   (long) (year * 60.0 / 45 * psec);
+    	res = begin + birth + mig - death;
+		}
 		return res;
 	}
 }
